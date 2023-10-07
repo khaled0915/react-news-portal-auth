@@ -10,6 +10,8 @@ const AuthProvider = ({children}) => {
 
     const [user , setUser] = useState(null);
 
+    const [loading , setLoading] = useState(true)
+
 
     // for register
 
@@ -35,6 +37,7 @@ const AuthProvider = ({children}) => {
       const unSubscribe  =  onAuthStateChanged(auth , currentUser =>{
             console.log('user in the auth state changed  ' , currentUser)
             setUser(currentUser);
+            setLoading(false);
         });
         return () =>{
             unSubscribe();
@@ -46,6 +49,7 @@ const AuthProvider = ({children}) => {
 
     const authInfo ={
         user,
+        loading,
         createUser,
         signIn,
         logOut
